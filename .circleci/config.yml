@@ -11,7 +11,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: echo pre adios
-      - run: echo pre adios
+      - run: echo adios
       - run: echo post adios
 
 workflows:
@@ -22,6 +22,6 @@ workflows:
   workflow2:
     jobs:
       - saluda
-      - despidete
+      - despidete:
           requires:
             - saluda
