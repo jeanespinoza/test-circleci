@@ -4,6 +4,8 @@ commands:
   install-aws-cli:
     steps:
       - run: echo installing aws-cli
+      - checkout
+      - run: ls -al
 
 jobs:
   install-dependencies:
