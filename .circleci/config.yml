@@ -17,4 +17,4 @@ jobs:
 workflows:
   workflow1:
     jobs:
-      - install-aws-cli
+      - install-dependencies
