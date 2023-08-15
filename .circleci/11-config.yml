@@ -1,0 +1,27 @@
+version: 2.1
+# comandos reutilizables en otros jobs.
+commands:
+  hora_y_espera:
+    steps:
+      - run: date && sleep 10
+
+jobs:
+  saluda:
+    docker:
+      - image: ubuntu:latest
+    steps:
+      - hora_y_espera
+      - run: echo hola
+      - hora_y_espera
+  despidete:
+    docker:
+      - image: ubuntu:latest
+    steps:
+      - hora_y_espera
+      - run: echo hola
+      - hora_y_espera
+
+workflows:
+  workflow1:
+    jobs:
+      - saluda

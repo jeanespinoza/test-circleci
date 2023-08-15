@@ -1,27 +1,18 @@
 version: 2.1
 # comandos reutilizables en otros jobs.
 commands:
-  hora_y_espera:
+  install-aws-cli:
     steps:
-      - run: date && sleep 10
+      - run: echo installing aws-cli
 
 jobs:
-  saluda:
+  install-dependencies:
     docker:
       - image: ubuntu:latest
     steps:
-      - hora_y_espera
-      - run: echo hola
-      - hora_y_espera
-  despidete:
-    docker:
-      - image: ubuntu:latest
-    steps:
-      - hora_y_espera
-      - run: echo hola
-      - hora_y_espera
+      - install-aws-cli
 
 workflows:
   workflow1:
     jobs:
-      - saluda
+      - install-aws-cli
