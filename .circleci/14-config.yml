@@ -8,9 +8,11 @@ jobs:
     steps:
       - run :
           command: echo hola $NOMBRE
-
+          environment:
+            NOMBRE: Jean
+      - run: ls
+      - run: echo mi id de job es $CIRCLE_WORKFLOW_JOB_ID
 workflows:
   workflow1:
     jobs:
-      - saluda:
-          context: test-context
+      - saluda
