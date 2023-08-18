@@ -7,7 +7,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: echo hola $NOMBRE
-      - run : Mi ID de job es $CIRCLE_WORKSPACE_ID
+      - run : echo Mi ID de job es $CIRCLE_WORKSPACE_ID
 workflows:
   workflow1:
     jobs:
