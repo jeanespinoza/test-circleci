@@ -1,20 +1,14 @@
 version: 2.1
 # comandos reutilizables en otros jobs.
-commands:
-  install-aws-cli:
-    steps:
-      - run: echo installing aws-cli
-      - run: ls -al
 
 jobs:
-  install-dependencies:
+  saluda:
     docker:
       - image: cimg/base:stable
     steps:
-      - install-aws-cli
-      - checkout
-      - run: find
+      - run: echo hola $NOMBRE
+      - run : Mi ID de job es $CIRCLE_WORKFLOW_JOB_ID
 workflows:
   workflow1:
     jobs:
-      - install-dependencies
+      - saluda
