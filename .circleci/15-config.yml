@@ -1,0 +1,16 @@
+version: 2.1
+# comandos reutilizables en otros jobs.
+
+jobs:
+  saluda:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run :
+          command: echo hola $NOMBRE
+
+workflows:
+  workflow1:
+    jobs:
+      - saluda:
+          context: test-context
