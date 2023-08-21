@@ -1,26 +1,28 @@
 version: 2.1
-
-commands:
-  install-prerequisites:
-    steps:
-      - run: apt update && apt install curl unzip groff less -y
-  install-aws-cli:
-    steps:
-      - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install && rm -rf awscliv2.zip aws
-  get-caller-identity:
-    steps:
-      - run: aws sts get-caller-identity
+# orbs usage
+orbs:
+  aws-cli: circleci/aws-cli@4.0.0
+  docker: circleci/docker@2.2.0
 
 jobs:
-  install-all:
-    docker:
-      - image: ubuntu:latest
+  aws:
+    executor: aws-cli/default
     steps:
-      - install-prerequisites
-      - install-aws-cli
+      - aws-cli/setup
+      - run: aws sts get-caller-identity
+  docker:
+    executor: docker/machine
+    steps:
+      - docker/install-docker
+      - checkout
+      - docker/build:
+          image: test_image
 
 workflows:
   workflow1:
     jobs:
-      - install-all:
+      - aws:
           context: aws-account
+      - docker:
+          context: aws-account
+      
